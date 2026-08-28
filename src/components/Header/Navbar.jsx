@@ -1,11 +1,13 @@
 // import React from 'react';
 
+import { Link } from "react-router";
+
 const Navbar = () => {
   const links = (
     <>
-      <li className="mr-3 p-2 hover:bg-gray-200 rounded-sm">Home</li>
-      <li className="mr-3 p-2 hover:bg-gray-200 rounded-sm">Listed Books</li>
-      <li className="mr-3 p-2 hover:bg-gray-200 rounded-sm">Pages to Read</li>
+      <Link to='/' className="mr-3 p-2 hover:bg-gray-200 rounded-sm">Home</Link>
+      <Link to='about' className="mr-3 p-2 hover:bg-gray-200 rounded-sm">About</Link>
+     
     </>
   );
   return (
