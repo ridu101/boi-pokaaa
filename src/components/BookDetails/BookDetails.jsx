@@ -1,9 +1,11 @@
 import { useLoaderData } from "react-router";
+import { addToStoreDB } from "../../assets/util/addToDb";
 
 const BookDetails = () => {
   const book = useLoaderData();
 
   const {
+    bookId,
     bookName,
     author,
     image,
@@ -15,6 +17,15 @@ const BookDetails = () => {
     publisher,
     yearOfPublishing,
   } = book;
+
+  const handleMarkAsRead = (id) => {
+    // store with id
+    // where to store
+    // array or collection
+    // if book already exist then show a alert
+    // if book not exist then push to the array
+    addToStoreDB(id);
+  };
 
   return (
     <div className="mt-10">
@@ -81,11 +92,8 @@ const BookDetails = () => {
           </div>
 
           <div className="mt-auto flex gap-3">
-            <button className="btn font-semibold">Read</button>
-
-            <button className="btn bg-[#50B1C9] font-semibold text-white">
-              WishList
-            </button>
+            <button onClick={() => handleMarkAsRead(bookId)} className="btn font-semibold">Read </button>
+            <button className="btn bg-[#50B1C9] font-semibold text-white"> WishList</button>
           </div>
         </div>
       </div>
