@@ -1,5 +1,7 @@
 import { useLoaderData } from "react-router";
-import { addToStoreDB } from "../../assets/util/addToDb";
+import { addToStoreDB,addToWishList } from "../../assets/util/addToDb";
+import Swal from "sweetalert2";
+
 
 const BookDetails = () => {
   const book = useLoaderData();
@@ -19,13 +21,44 @@ const BookDetails = () => {
   } = book;
 
   const handleMarkAsRead = (id) => {
-    // store with id
-    // where to store
-    // array or collection
-    // if book already exist then show a alert
-    // if book not exist then push to the array
-    addToStoreDB(id);
-  };
+  const isAdded = addToStoreDB(id);
+
+  if (isAdded) {
+    Swal.fire({
+      title: "Success!",
+      text: "Book added to the Read List",
+      icon: "success",
+      confirmButtonColor: "#23BE0A",
+    });
+  } else {
+    Swal.fire({
+      title: "Already Added!",
+      text: "This book is already in your Read List",
+      icon: "warning",
+      confirmButtonColor: "#F59E0B",
+    });
+  }
+};
+
+ const handleAddToWishList = (id) => {
+  const isAdded = addToWishList(id);
+
+  if (isAdded) {
+    Swal.fire({
+      title: "Success!",
+      text: "Book added to the Wish List",
+      icon: "success",
+      confirmButtonColor: "#50B1C9",
+    });
+  } else {
+    Swal.fire({
+      title: "Already Added!",
+      text: "This book is already in your Wish List",
+      icon: "warning",
+      confirmButtonColor: "#F59E0B",
+    });
+  }
+};
 
   return (
     <div className="mt-10">
@@ -92,8 +125,18 @@ const BookDetails = () => {
           </div>
 
           <div className="mt-auto flex gap-3">
-            <button onClick={() => handleMarkAsRead(bookId)} className="btn font-semibold">Read </button>
-            <button className="btn bg-[#50B1C9] font-semibold text-white"> WishList</button>
+            <button
+              onClick={() => handleMarkAsRead(bookId)}
+              className="btn font-semibold"
+            >
+              Read{" "}
+            </button>
+            <button
+  onClick={() => handleAddToWishList(bookId)}
+  className="btn bg-[#50B1C9] font-semibold text-white"
+>
+  WishList
+</button>
           </div>
         </div>
       </div>

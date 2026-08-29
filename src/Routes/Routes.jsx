@@ -5,6 +5,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import About from "../components/About/About";
 import BookDetails from "../components/BookDetails/BookDetails";
+import ReadList from "../pages/ReadList/ReadList";
+import PagesToRead from "../pages/PagesToRead/PagesToRead";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +33,16 @@ export const router = createBrowserRouter([
           return books.find((book) => book.bookId === parseInt(params.id));
         },
         Component: BookDetails,
+      },
+      {
+        path: "readList",
+        loader: () => fetch("booksData.json"),
+        Component: ReadList,
+      },
+      {
+        path: "/pagesToRead",
+        loader: () => fetch("/booksData.json"),
+        Component: PagesToRead
       },
     ],
   },
